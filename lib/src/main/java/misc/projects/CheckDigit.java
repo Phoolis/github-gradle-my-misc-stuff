@@ -1,7 +1,7 @@
 package misc.projects;
 
 /**
-     * Generate a EAN-13 check digit to given number code.
+     * Generate a EAN-13 check digit to given number code. 
      *
      * "The check digit is an additional digit, used to verify that a barcode has been scanned correctly. 
      * It is computed modulo 10, where the weights in the checksum calculation alternate 3 and 1. In particular, 
@@ -9,22 +9,23 @@ package misc.projects;
      * also recognizes 90% of transposition errors (all cases, where the difference between adjacent digits is not 5)."
      * [Wikipedia EAN-13: https://en.wikipedia.org/wiki/International_Article_Number]
      *
-     * @param code the number code
-     * @return the number code suffixed with the check digit
+     * @param code the number code as string
+     * @return the number code suffixed with the check digit as string
      */
 
 public class CheckDigit {
 
-    public int calculateCheckDigit(int code) {
+    public String calculateCheckDigit(String code) {
         
         // Calculates the check digit for given number code.
         // Digits are numbered from right to left, starting with index 1.
         // Odd indexed digits are tripled and added to the sum,.
         // Even indexed digits are added to the sum.
         // Modulo 10 of the sum is the check digit.
+        // The checksum digit is the digit which must be added to this checksum 
+        // to get a number divisible by 10 (i.e. the additive inverse of the checksum, modulo 10)
 
-        String numStr = String.valueOf(code);
-        char[] charArray = numStr.toCharArray();
+        char[] charArray = code.toCharArray();
         char[] reversed = new char[charArray.length];
         for (int i = 0; i < charArray.length; i++) {
             reversed[charArray.length -i -1] = charArray[i];
@@ -39,14 +40,13 @@ public class CheckDigit {
                 sum += 3 * Character.getNumericValue(reversed[i]);
             }
         }
-        char checkDigit = (char) (sum % 10);
-        return checkDigit;
+        return Integer.toString(10 - sum % 10);
     }
 
-    public int appendCheckDigit(int code) {
-        int barcode;
-        int checkDigit = calculateCheckDigit(code);
-        barcode = code * 10 + checkDigit;
+    public String appendCheckDigit(String code) {
+        String barcode = code;
+        String checkDigit = calculateCheckDigit(barcode);
+        barcode += checkDigit; 
         return barcode;
     }
 
