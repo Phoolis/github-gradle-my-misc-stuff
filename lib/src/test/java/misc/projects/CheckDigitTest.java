@@ -45,12 +45,16 @@ public class CheckDigitTest {
     }
 
     @Test
+    void codeOneThreeReturnsZero() {
+        assertEquals("0", digitter.calculateCheckDigit("13"));
+    }
+    
+    @Test
     void codeOneTwoThreeReturnsSix() {
         // 123 -> 3*3 + 2 + 3*1 = 14
         // 14 % 10 = 4
         assertEquals("6", digitter.calculateCheckDigit("123"));
     }
-
     @Test
     void appendSixWhenGivenCodeOneTwoThree() {
         assertEquals("1236", digitter.appendCheckDigit("123"));

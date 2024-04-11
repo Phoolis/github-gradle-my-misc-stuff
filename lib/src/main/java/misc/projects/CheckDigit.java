@@ -40,7 +40,14 @@ public class CheckDigit {
                 sum += 3 * Character.getNumericValue(reversed[i]);
             }
         }
-        return Integer.toString(10 - sum % 10);
+        int checkDigit;
+        if (sum % 10 == 0) {
+            checkDigit = 0;
+        } 
+        else {
+            checkDigit = 10 - sum % 10;
+        }
+        return Integer.toString(checkDigit);
     }
 
     public String appendCheckDigit(String code) {
