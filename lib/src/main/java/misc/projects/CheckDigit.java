@@ -1,7 +1,7 @@
 package misc.projects;
 
 /**
-     * Generate a EAN-13 check digit to given number code. 
+     * Generate an EAN-13 check digit to given number code. 
      *
      * "The check digit is an additional digit, used to verify that a barcode has been scanned correctly. 
      * It is computed modulo 10, where the weights in the checksum calculation alternate 3 and 1. In particular, 
@@ -21,7 +21,7 @@ public class CheckDigit {
         // Digits are numbered from right to left, starting with index 1.
         // Odd indexed digits are tripled and added to the sum,.
         // Even indexed digits are added to the sum.
-        // Modulo 10 of the sum is the check digit.
+        // 
         // The checksum digit is the digit which must be added to this checksum 
         // to get a number divisible by 10 (i.e. the additive inverse of the checksum, modulo 10)
 
@@ -51,10 +51,8 @@ public class CheckDigit {
     }
 
     public String appendCheckDigit(String code) {
-        String barcode = code;
-        String checkDigit = calculateCheckDigit(barcode);
-        barcode += checkDigit; 
-        return barcode;
+        String checkDigit = calculateCheckDigit(code);
+        return code + checkDigit;
     }
 
 }
