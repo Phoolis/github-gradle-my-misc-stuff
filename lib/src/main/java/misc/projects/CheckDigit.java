@@ -50,9 +50,19 @@ public class CheckDigit {
         return Integer.toString(checkDigit);
     }
 
+    // appends check digit to given code (generates barcode)
     public String appendCheckDigit(String code) {
         String checkDigit = calculateCheckDigit(code);
         return code + checkDigit;
+    }
+
+    // checks if given barcode is valid under EAN-13 rules (length does not matter, only the checksum application)
+    public boolean isValidBarcode(String code) {
+        String lastDigit = code.substring(code.length() -1);
+        if (calculateCheckDigit(code.substring(0, code.length() -1)).equals(lastDigit)) {
+            return true;
+        }
+        return false;
     }
 
 }

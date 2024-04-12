@@ -76,4 +76,13 @@ public class CheckDigitTest {
     void appendSevenWhenGivenCode7351353() {
         assertEquals("73513537", digitter.appendCheckDigit("7351353"));
     }
+
+    @Test
+    void returnsTrueWhenGivenCode4006381333931() {
+        assertTrue(digitter.isValidBarcode("4006381333931"));
+    }
+    @Test
+    void returnsTrueWhenGivenCode73513537() {
+        assertTrue(digitter.isValidBarcode("73513537"));
+    }
 }
